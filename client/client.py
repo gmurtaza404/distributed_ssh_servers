@@ -14,7 +14,7 @@ def parse_onion_file():
 
 
 def make_connect_data(onion_link, key, comp_name, local_ip, public_ip):
-    return {"onion_link":onion_link, "key": key, "computer_name": comp_name, "local_ip": local_ip, "public_ip": public_ip}
+    return json.dumps({"onion_link":onion_link, "key": key, "computer_name": comp_name, "local_ip": local_ip, "public_ip": public_ip})
 
 
 
