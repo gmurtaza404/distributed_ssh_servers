@@ -1,7 +1,7 @@
 const express = require("express")
 
 // Globals
-temp_db = {"abc": {"machine_identifier": 1234, "current_ip": "1.1.1.1"}}
+database = {} 
 const port = 3000
 const app = express()
 
@@ -12,22 +12,24 @@ console.log("Starting the server...")
 
 
 const main = () => {
-    
-    app.get('/', (req, res) => {
-        console.log(req)
-        res.send("Help message, API supports following operations\n1. /machine\n\n\n\n")
-    })
-    
-    app.get('/all_machines', (req, res) => {
-        res.send(temp_db)
-    })
-    app.get('/machine', (req, res) => {
-        res.send(temp_db[req.query.machine_name])
-    })
-    app.put('/machine', (req, res) =>{
-        // do something
-    })
+    app.route('/servers')
+        .get((req, res)=>{
+            res.status(200).json({
+                message: 'servers...'
+            });
+        })
+        .put((req, res)=>{
+            res.status(200).json({
+                message: 'server added'
+            });
 
+        })
+        .post((req, res)=>{   
+            res.status(200).json({
+                message: 'server added'
+            });
+        })
+    
 
 
     app.listen(port, () => console.log("listening on port 3000!"))
@@ -44,6 +46,12 @@ main()
 
 /*
     DB entry structure, 
-        machine_identifier: hash
+    onion_link: string
+    {    
+        machine_name: string
+        onion_key: string 
         curr_ip: string
+        machine_location: string , (add or remove?)
+        online: boolean
+    }
 */
